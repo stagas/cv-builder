@@ -15,7 +15,6 @@ app.use('*', (req, res, next) => {
 })
 
 app.use(express.json({ limit: '10mb' }))
-app.use(express.static(path.join(__dirname)))
 
 app.get('/fetch', async (req, res) => {
   const { url } = req.query
@@ -62,6 +61,8 @@ app.post('/export-pdf', async (req, res) => {
     res.status(500).send('Failed to generate PDF.')
   }
 })
+
+app.use(express.static(__dirname))
 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`)
