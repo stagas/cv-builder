@@ -12,5 +12,8 @@
   "dependencies": {
     "express": "^4.19.2",
     "puppeteer": "^22.12.1"
-  }
+  },
+  "trustedDependencies": [
+    "puppeteer"
+  ]
 }
