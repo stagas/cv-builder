@@ -107,11 +107,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   async function exportToPDF() {
-    const twCSS = await fetch(
-      'http://localhost:3000/fetch?url=https://cdn.tailwindcss.com',
-    ).then(res => res.text())
     const fontCSS = await fetch(
-      'http://localhost:3000/fetch?url=https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;700&family=Cormorant+Garamond:wght@700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Fira+Sans:wght@400&family=Inter:wght@400;500;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Noto+Serif:wght@400&family=Open+Sans:wght@400&family=Oxygen:wght@300&family=Playfair+Display:wght@400;700&family=Raleway:wght@300&family=Roboto:wght@700&family=Source+Sans+Pro:wght@400&display=swap',
+      '/fetch?url=https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;700&family=Cormorant+Garamond:wght@700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Fira+Sans:wght@400&family=Inter:wght@400;500;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Noto+Serif:wght@400&family=Open+Sans:wght@400&family=Oxygen:wght@300&family=Playfair+Display:wght@400;700&family=Raleway:wght@300&family=Roboto:wght@700&family=Source+Sans+Pro:wght@400&display=swap',
     ).then(res => res.text())
 
     const html = `
@@ -149,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
     `
 
     try {
-      const res = await fetch('http://localhost:3000/export-pdf', {
+      const res = await fetch('/export-pdf', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ html }),
