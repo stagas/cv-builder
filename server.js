@@ -37,7 +37,7 @@ app.post('/export-pdf', async (req, res) => {
   }
 
   try {
-    const browser = await puppeteer.launch({ headless: true })
+    const browser = await puppeteer.launch({ headless: 'new' })
     const page = await browser.newPage()
 
     await page.setContent(html, { waitUntil: 'networkidle0' })
