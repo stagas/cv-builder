@@ -7,7 +7,7 @@
   <title>CV Builder</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;700&family=Cormorant+Garamond:wght@700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Fira+Sans:wght@400&family=Inter:wght@400;500;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Noto+Serif:wght@400&family=Open+Sans:wght@400&family=Oxygen:wght@300&family=Playfair+Display:wght@400;700&family=Raleway:wght@300&family=Roboto:wght@700&family=Source+Sans+Pro:wght@400&display=swap');
 
     body {
       font-family: 'Chivo', sans-serif;
@@ -31,6 +31,26 @@
           </button>
         </div>
         <div id="editor" class="space-y-6">
+          <!-- Style Picker -->
+          <div class="p-4 bg-gray-50 rounded-lg shadow-inner">
+            <h3 class="text-xl font-semibold mb-3 text-gray-800">Style</h3>
+            <select id="style-picker"
+              class="p-3 border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+              <option value="formal">Formal</option>
+              <option value="modern">Modern</option>
+              <option value="creative">Creative</option>
+              <option value="minimalist">Minimalist</option>
+              <option value="academic">Academic</option>
+              <option value="professional">Professional</option>
+              <option value="elegant">Elegant</option>
+              <option value="impact">Impact</option>
+              <option value="refined">Refined</option>
+              <option value="airy">Airy</option>
+              <option value="executive">Executive</option>
+              <option value="vibrant">Vibrant</option>
+              <option value="modern-serif">Modern Serif</option>
+            </select>
+          </div>
           <!-- Personal Details -->
           <div class="p-4 bg-gray-50 rounded-lg shadow-inner">
             <h3 class="text-xl font-semibold mb-3 text-gray-800">Personal Details</h3>
@@ -51,8 +71,8 @@
           <!-- Summary -->
           <div class="p-4 bg-gray-50 rounded-lg shadow-inner">
             <h3 class="text-xl font-semibold mb-3 text-gray-800">Summary</h3>
-            <textarea id="summary" placeholder="Professional Summary"
-              class="p-3 border border-gray-300 rounded-lg w-full h-28 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"></textarea>
+            <textarea id="summary" placeholder="Professional Summary" rows="8"
+              class="p-3 border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"></textarea>
           </div>
 
           <!-- Experience -->
@@ -60,7 +80,7 @@
             <div class="flex justify-between items-center mb-3">
               <h3 class="text-xl font-semibold text-gray-800">Work Experience</h3>
               <button id="add-experience-btn"
-                class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition text-sm">Add</button>
+                class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition">Add</button>
             </div>
             <div id="experience-list" class="space-y-4">
               <!-- Experience items will be added here -->
@@ -72,7 +92,7 @@
             <div class="flex justify-between items-center mb-3">
               <h3 class="text-xl font-semibold text-gray-800">Education</h3>
               <button id="add-education-btn"
-                class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition text-sm">Add</button>
+                class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition">Add</button>
             </div>
             <div id="education-list" class="space-y-4">
               <!-- Education items will be added here -->
@@ -82,8 +102,8 @@
           <!-- Skills -->
           <div class="p-4 bg-gray-50 rounded-lg shadow-inner">
             <h3 class="text-xl font-semibold mb-3 text-gray-800">Skills</h3>
-            <input type="text" id="skills" placeholder="Comma-separated skills (e.g., HTML, CSS, JavaScript)"
-              class="p-3 border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+            <textarea rows="4" id="skills" placeholder="Comma-separated skills (e.g., HTML, CSS, JavaScript)"
+              class="p-3 border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"></textarea>
           </div>
         </div>
       </div>
@@ -98,7 +118,959 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
   <script src="./script.js"></script>
+
+  <!-- FORMAL TEMPLATE -->
+  <script id="formal-template" type="text/x-handlebars-template">
+    <div class="p-16 h-full w-full">
+      <div class="relative h-full w-full">
+        <div class="absolute inset-0 opacity-5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1200 1600" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+                <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#1f2937" stroke-width="1"/>
+              </pattern>
+              <pattern id="dots" width="60" height="60" patternUnits="userSpaceOnUse">
+                <circle cx="30" cy="30" r="2" fill="#374151"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)"/>
+            <rect width="100%" height="100%" fill="url(#dots)"/>
+            <g stroke="#6b7280" stroke-width="0.5" opacity="0.3">
+              <line x1="0" y1="0" x2="1200" y2="400"/><line x1="0" y1="200" x2="1200" y2="600"/><line x1="0" y1="400" x2="1200" y2="800"/><line x1="0" y1="600" x2="1200" y2="1000"/><line x1="0" y1="800" x2="1200" y2="1200"/><line x1="0" y1="1000" x2="1200" y2="1400"/><line x1="0" y1="1200" x2="1200" y2="1600"/>
+            </g>
+          </svg>
+        </div>
+        <div class="relative z-10">
+          <div class="border-l-8 border-slate-800 pl-8 mb-12">
+            <h1 class="text-5xl font-light text-slate-900 mb-2" style="font-family: 'Chivo', sans-serif; font-weight: 300;">{{#if personal.name}}{{personal.name}}{{else}}Your Name{{/if}}</h1>
+            <div class="text-slate-600 text-lg space-y-1" style="font-family: 'Chivo', sans-serif; font-weight: 300;">
+              {{#if personal.email}}<div class="text-blue-700"><a href="mailto:{{personal.email}}" target="_blank">{{personal.email}}</a></div>{{/if}}
+              {{#if personal.phone}}<div>{{personal.phone}}</div>{{/if}}
+              {{#if personal.linkedin}}<div class="text-blue-700"><a href="{{personal.linkedin}}" target="_blank">{{personal.linkedin}}</a></div>{{/if}}
+              {{#if personal.github}}<div class="text-blue-700"><a href="{{personal.github}}" target="_blank">{{personal.github}}</a></div>{{/if}}
+            </div>
+          </div>
+          {{#if summary}}
+          <div class="mb-10">
+            <div class="bg-slate-50 p-6 rounded-lg border-l-4 border-slate-300">
+              <p class="text-slate-700 leading-relaxed text-lg" style="font-family: 'Chivo', sans-serif; font-weight: 300;">{{summary}}</p>
+            </div>
+          </div>
+          {{/if}}
+          {{#if experience}}
+          <div class="mb-10">
+            <h2 class="text-2xl font-semibold text-slate-900 mb-6 pb-2 border-b-2 border-slate-200" style="font-family: 'Crimson Text', serif;">Professional Experience</h2>
+            <div class="space-y-8">
+              {{#each experience}}
+              <div class="relative pl-8 border-l-2 border-slate-200">
+                <div class="absolute w-4 h-4 bg-slate-400 rounded-full -left-2 top-1"></div>
+                <div class="flex justify-between items-start mb-2">
+                  <div>
+                    <h3 class="text-2xl -mt-1 font-semibold text-slate-900" style="font-family: 'Crimson Text', serif;">{{#if title}}{{title}}{{else}}Job Title{{/if}}</h3>
+                    <h4 class="text-lg text-slate-700 font-medium" style="font-family: 'Chivo', sans-serif;">{{#if company}}{{company}}{{else}}Company{{/if}}</h4>
+                  </div>
+                  <span class="text-sm text-slate-500 bg-slate-100 px-3 py-1 rounded-full" style="font-family: 'Chivo', sans-serif; font-weight: 300;">{{#if startDate}}{{startDate}}{{else}}Start{{/if}} — {{#if endDate}}{{endDate}}{{else}}End{{/if}}</span>
+                </div>
+                <p class="text-slate-600 leading-relaxed" style="font-family: 'Chivo', sans-serif; font-weight: 300;">{{#if description}}{{description}}{{else}}A description of your role and accomplishments.{{/if}}</p>
+              </div>
+              {{/each}}
+            </div>
+          </div>
+          {{/if}}
+          {{#if education}}
+          <div class="mb-10">
+            <h2 class="text-2xl font-semibold text-slate-900 mb-6 pb-2 border-b-2 border-slate-200" style="font-family: 'Crimson Text', serif;">Education</h2>
+            <div class="space-y-6">
+              {{#each education}}
+              <div>
+                <h3 class="text-xl font-semibold text-slate-900 mb-1" style="font-family: 'Crimson Text', serif;">{{#if degree}}{{degree}}{{else}}Degree{{/if}}{{#if field}} in {{field}}{{/if}}</h3>
+                <div class="flex justify-between items-center">
+                  <p class="text-slate-600 font-medium" style="font-family: 'Chivo', sans-serif;">{{#if school}}{{school}}{{else}}Institution{{/if}}</p>
+                  <span class="text-sm text-slate-500 bg-slate-100 px-3 py-1 rounded-full" style="font-family: 'Chivo', sans-serif; font-weight: 300;">{{#if year}}{{year}}{{else}}Year{{/if}}</span>
+                </div>
+              </div>
+              {{/each}}
+            </div>
+          </div>
+          {{/if}}
+          {{#if skills}}
+          <div class="mb-10">
+            <h2 class="text-2xl font-semibold text-slate-900 mb-6 pb-2 border-b-2 border-slate-200" style="font-family: 'Crimson Text', serif;">Skills</h2>
+            <div class="flex flex-wrap gap-3">
+              {{#each skills}}
+              <span class="bg-slate-100 text-slate-800 font-thin px-4 py-2 rounded-xl border border-slate-200" style="font-family: 'Chivo', sans-serif;">{{this}}</span>
+              {{/each}}
+            </div>
+          </div>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <!-- MODERN TEMPLATE -->
+  <script id="modern-template" type="text/x-handlebars-template">
+    <div class="w-full h-full flex font-sans">
+      <div class="w-1/3 bg-gray-800 text-white p-10">
+        <div class="text-center mb-12">
+          <h1 class="text-4xl font-bold text-white mb-2">{{#if personal.name}}{{personal.name}}{{else}}Your Name{{/if}}</h1>
+        </div>
+        <div class="space-y-8">
+          <div>
+            <h2 class="text-xl font-semibold text-gray-300 border-b-2 border-gray-600 pb-2 mb-4">Contact</h2>
+            <div class="text-gray-400 space-y-2">
+              {{#if personal.email}}<div><span class="font-semibold">Email:</span> <a href="mailto:{{personal.email}}" class="text-blue-300 hover:text-blue-500">{{personal.email}}</a></div>{{/if}}
+              {{#if personal.phone}}<div><span class="font-semibold">Phone:</span> <a href="tel:{{personal.phone}}">{{personal.phone}}</a></div>{{/if}}
+              {{#if personal.linkedin}}<div><span class="font-semibold">LinkedIn:</span> <a href="{{personal.linkedin}}" target="_blank" class="text-blue-300 hover:text-blue-500">{{personal.linkedin}}</a></div>{{/if}}
+              {{#if personal.github}}<div><span class="font-semibold">GitHub:</span> <a href="{{personal.github}}" target="_blank" class="text-blue-300 hover:text-blue-500">{{personal.github}}</a></div>{{/if}}
+            </div>
+          </div>
+          {{#if skills}}
+          <div>
+            <h2 class="text-xl font-semibold text-gray-300 border-b-2 border-gray-600 pb-2 mb-4">Skills</h2>
+            <div class="flex flex-wrap gap-2">
+              {{#each skills}}
+              <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm">{{this}}</span>
+              {{/each}}
+            </div>
+          </div>
+          {{/if}}
+        </div>
+      </div>
+      <div class="w-2/3 bg-white p-10 overflow-y-auto">
+        {{#if summary}}
+        <div class="mb-10">
+          <h2 class="text-3xl font-bold text-gray-800 border-b-4 border-blue-500 pb-2 mb-6">Profile</h2>
+          <p class="text-gray-600 text-lg leading-relaxed">{{summary}}</p>
+        </div>
+        {{/if}}
+        {{#if experience}}
+        <div class="mb-10">
+          <h2 class="text-3xl font-bold text-gray-800 border-b-4 border-blue-500 pb-2 mb-6">Experience</h2>
+          <div class="space-y-8">
+            {{#each experience}}
+            <div>
+              <div class="flex justify-between items-baseline">
+                <h3 class="text-2xl font-semibold text-gray-900">{{#if title}}{{title}}{{else}}Job Title{{/if}}</h3>
+                <span class="text-sm font-medium text-gray-500">{{#if startDate}}{{startDate}}{{else}}Start{{/if}} — {{#if endDate}}{{endDate}}{{else}}End{{/if}}</span>
+              </div>
+              <h4 class="text-xl text-gray-700 mb-2">{{#if company}}{{company}}{{else}}Company{{/if}}</h4>
+              <p class="text-gray-600">{{#if description}}{{description}}{{else}}A description of your role and accomplishments.{{/if}}</p>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+        {{/if}}
+        {{#if education}}
+        <div>
+          <h2 class="text-3xl font-bold text-gray-800 border-b-4 border-blue-500 pb-2 mb-6">Education</h2>
+          <div class="space-y-6">
+            {{#each education}}
+            <div>
+              <div class="flex justify-between items-baseline">
+                <h3 class="text-2xl font-semibold text-gray-900">{{#if degree}}{{degree}}{{else}}Degree{{/if}}{{#if field}} in {{field}}{{/if}}</h3>
+                <span class="text-sm font-medium text-gray-500">{{#if year}}{{year}}{{else}}Year{{/if}}</span>
+              </div>
+              <h4 class="text-xl text-gray-700">{{#if school}}{{school}}{{else}}Institution{{/if}}</h4>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+  </script>
+
+  <!-- CREATIVE TEMPLATE -->
+  <script id="creative-template" type="text/x-handlebars-template">
+    <div class="w-full h-full bg-cream-50 font-serif" style="font-family: 'Crimson Text', serif;">
+      <div class="bg-teal-700 text-white text-center p-12">
+        <h1 class="text-6xl font-bold tracking-wider">{{#if personal.name}}{{personal.name}}{{else}}Your Name{{/if}}</h1>
+        <div class="flex justify-center gap-6 mt-4 text-lg">
+          {{#if personal.email}}<a href="mailto:{{personal.email}}" class="text-teal-200 hover:text-white">{{personal.email}}</a>{{/if}}
+          {{#if personal.phone}}<a href="tel:{{personal.phone}}" class="text-teal-200 hover:text-white">{{personal.phone}}</a>{{/if}}
+        </div>
+        <div class="flex justify-center gap-6 mt-2 text-lg">
+          {{#if personal.linkedin}}<a href="{{personal.linkedin}}" target="_blank" class="text-teal-200 hover:text-white">{{personal.linkedin}}</a>{{/if}}
+          {{#if personal.github}}<a href="{{personal.github}}" target="_blank" class="text-teal-200 hover:text-white">{{personal.github}}</a>{{/if}}
+        </div>
+      </div>
+      <div class="p-16">
+        {{#if summary}}
+        <div class="mb-12 text-center">
+          <h2 class="text-3xl font-semibold text-teal-800 mb-4 tracking-widest">SUMMARY</h2>
+          <p class="text-gray-700 text-xl max-w-4xl mx-auto leading-relaxed">{{summary}}</p>
+        </div>
+        {{/if}}
+        <div class="grid grid-cols-3 gap-16">
+          <div class="col-span-2">
+            {{#if experience}}
+            <div class="mb-12">
+              <h2 class="text-3xl font-semibold text-teal-800 mb-8 tracking-widest">EXPERIENCE</h2>
+              <div class="relative border-l-4 border-teal-200 space-y-10">
+                {{#each experience}}
+                <div class="pl-8 relative">
+                  <div class="absolute -left-2.5 top-1 w-5 h-5 bg-teal-700 rounded-full border-4 border-white"></div>
+                  <span class="text-sm text-gray-500">{{#if startDate}}{{startDate}}{{else}}Start{{/if}} — {{#if endDate}}{{endDate}}{{else}}End{{/if}}</span>
+                  <h3 class="text-2xl font-bold text-gray-800 mt-1">{{#if title}}{{title}}{{else}}Job Title{{/if}}</h3>
+                  <h4 class="text-xl text-gray-600 mb-2">{{#if company}}{{company}}{{else}}Company{{/if}}</h4>
+                  <p class="text-gray-700">{{#if description}}{{description}}{{else}}A description of your role and accomplishments.{{/if}}</p>
+                </div>
+                {{/each}}
+              </div>
+            </div>
+            {{/if}}
+          </div>
+          <div class="space-y-12">
+            {{#if skills}}
+            <div>
+              <h2 class="text-3xl font-semibold text-teal-800 mb-6 tracking-widest">SKILLS</h2>
+              <div class="flex flex-wrap gap-3">
+                {{#each skills}}
+                <span class="bg-teal-100 text-teal-800 px-4 py-2 rounded-lg text-md">{{this}}</span>
+                {{/each}}
+              </div>
+            </div>
+            {{/if}}
+            {{#if education}}
+            <div>
+              <h2 class="text-3xl font-semibold text-teal-800 mb-6 tracking-widest">EDUCATION</h2>
+              <div class="space-y-6">
+                {{#each education}}
+                <div>
+                  <h3 class="text-xl font-bold text-gray-800">{{#if degree}}{{degree}}{{else}}Degree{{/if}}</h3>
+                  <p class="text-gray-600">{{#if school}}{{school}}{{else}}Institution{{/if}} - {{#if year}}{{year}}{{else}}Year{{/if}}</p>
+                  {{#if field}}<p class="text-gray-500">{{field}}</p>{{/if}}
+                </div>
+                {{/each}}
+              </div>
+            </div>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <!-- MINIMALIST TEMPLATE -->
+  <script id="minimalist-template" type="text/x-handlebars-template">
+    <div class="w-full h-full bg-white p-20" style="font-family: 'Inter', sans-serif;">
+      <div class="text-center mb-16">
+        <h1 class="text-6xl font-bold text-gray-800">{{#if personal.name}}{{personal.name}}{{else}}Your Name{{/if}}</h1>
+        <div class="flex justify-center gap-x-6 gap-y-2 mt-6 text-lg text-gray-500 flex-wrap">
+          {{#if personal.email}}<a href="mailto:{{personal.email}}" class="hover:text-gray-800">{{personal.email}}</a>{{/if}}
+          {{#if personal.phone}}<span>{{personal.phone}}</span>{{/if}}
+          {{#if personal.linkedin}}<a href="{{personal.linkedin}}" target="_blank" class="hover:text-gray-800">{{personal.linkedin}}</a>{{/if}}
+          {{#if personal.github}}<a href="{{personal.github}}" target="_blank" class="hover:text-gray-800">{{personal.github}}</a>{{/if}}
+        </div>
+      </div>
+      <div class="max-w-4xl mx-auto space-y-12">
+        {{#if summary}}
+        <section>
+          <p class="text-center text-xl text-gray-600 leading-relaxed">{{summary}}</p>
+        </section>
+        {{/if}}
+        {{#if experience}}
+        <section>
+          <h2 class="text-2xl font-semibold text-gray-700 mb-6 tracking-widest uppercase">Experience</h2>
+          <div class="space-y-8">
+            {{#each experience}}
+            <div class="grid grid-cols-4 gap-4">
+              <div class="col-span-1 text-gray-500 font-medium">
+                <p>{{#if startDate}}{{startDate}}{{else}}Start{{/if}} — {{#if endDate}}{{endDate}}{{else}}End{{/if}}</p>
+                <p>{{#if company}}{{company}}{{else}}Company{{/if}}</p>
+              </div>
+              <div class="col-span-3">
+                <h3 class="text-xl font-bold text-gray-800">{{#if title}}{{title}}{{else}}Job Title{{/if}}</h3>
+                <p class="mt-2 text-gray-600">{{#if description}}{{description}}{{else}}A description of your role and accomplishments.{{/if}}</p>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </section>
+        {{/if}}
+        {{#if education}}
+        <section>
+          <h2 class="text-2xl font-semibold text-gray-700 mb-6 tracking-widest uppercase">Education</h2>
+          <div class="space-y-6">
+            {{#each education}}
+            <div class="grid grid-cols-4 gap-4">
+              <div class="col-span-1 text-gray-500 font-medium">
+                <p>{{#if year}}{{year}}{{else}}Year{{/if}}</p>
+              </div>
+              <div class="col-span-3">
+                <h3 class="text-xl font-bold text-gray-800">{{#if degree}}{{degree}}{{else}}Degree{{/if}}</h3>
+                <p class="text-gray-600">{{#if school}}{{school}}{{else}}Institution{{/if}}</p>
+                {{#if field}}<p class="text-sm text-gray-500">{{field}}</p>{{/if}}
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </section>
+        {{/if}}
+        {{#if skills}}
+        <section>
+          <h2 class="text-2xl font-semibold text-gray-700 mb-6 tracking-widest uppercase">Skills</h2>
+          <div class="flex flex-wrap gap-4 text-lg">
+            {{#each skills}}
+            <span class="bg-gray-100 text-gray-700 px-4 py-2 rounded">{{this}}</span>
+            {{/each}}
+          </div>
+        </section>
+        {{/if}}
+      </div>
+    </div>
+  </script>
+
+  <!-- ACADEMIC TEMPLATE -->
+  <script id="academic-template" type="text/x-handlebars-template">
+    <div class="w-full h-full bg-gray-50 p-16" style="font-family: 'Lora', serif;">
+      <header class="text-center mb-12 border-b-2 border-gray-300 pb-8">
+        <h1 class="text-5xl font-bold text-gray-900">{{#if personal.name}}{{personal.name}}{{else}}Your Name{{/if}}</h1>
+        <div class="flex justify-center gap-x-8 gap-y-2 mt-4 text-lg text-gray-600 flex-wrap">
+          {{#if personal.email}}<a href="mailto:{{personal.email}}" class="text-blue-800 hover:underline">{{personal.email}}</a>{{/if}}
+          {{#if personal.phone}}<span>{{personal.phone}}</span>{{/if}}
+          {{#if personal.linkedin}}<a href="{{personal.linkedin}}" target="_blank" class="text-blue-800 hover:underline">{{personal.linkedin}}</a>{{/if}}
+          {{#if personal.github}}<a href="{{personal.github}}" target="_blank" class="text-blue-800 hover:underline">{{personal.github}}</a>{{/if}}
+        </div>
+      </header>
+      <main class="space-y-10">
+        {{#if summary}}
+        <section>
+          <h2 class="text-2xl font-bold text-gray-800 mb-4 uppercase tracking-wider">Abstract</h2>
+          <p class="text-lg text-gray-700 leading-relaxed italic">{{summary}}</p>
+        </section>
+        {{/if}}
+        {{#if education}}
+        <section>
+          <h2 class="text-2xl font-bold text-gray-800 mb-4 uppercase tracking-wider">Education</h2>
+          <div class="space-y-4">
+            {{#each education}}
+            <div>
+              <h3 class="text-xl font-semibold text-gray-900">{{#if school}}{{school}}{{else}}Institution{{/if}}</h3>
+              <div class="flex justify-between">
+                <p class="text-lg text-gray-700 italic">{{#if degree}}{{degree}}{{else}}Degree{{/if}}{{#if field}}, {{field}}{{/if}}</p>
+                <p class="text-lg text-gray-600">{{#if year}}{{year}}{{else}}Year{{/if}}</p>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </section>
+        {{/if}}
+        {{#if experience}}
+        <section>
+          <h2 class="text-2xl font-bold text-gray-800 mb-4 uppercase tracking-wider">Professional Appointments</h2>
+          <div class="space-y-6">
+            {{#each experience}}
+            <div>
+              <div class="flex justify-between">
+                <h3 class="text-xl font-semibold text-gray-900">{{#if title}}{{title}}{{else}}Job Title{{/if}}</h3>
+                <p class="text-lg text-gray-600">{{#if startDate}}{{startDate}}{{else}}Start{{/if}} — {{#if endDate}}{{endDate}}{{else}}End{{/if}}</p>
+              </div>
+              <p class="text-lg text-gray-700 italic">{{#if company}}{{company}}{{else}}Company{{/if}}</p>
+              <p class="mt-2 text-gray-600">{{#if description}}{{description}}{{else}}A description of your role and accomplishments.{{/if}}</p>
+            </div>
+            {{/each}}
+          </div>
+        </section>
+        {{/if}}
+        {{#if skills}}
+        <section>
+          <h2 class="text-2xl font-bold text-gray-800 mb-4 uppercase tracking-wider">Skills</h2>
+          <div class="flex flex-wrap gap-2">
+            {{#each skills}}
+            <span class="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm">{{this}}</span>
+            {{/each}}
+          </div>
+        </section>
+        {{/if}}
+      </main>
+    </div>
+  </script>
+
+  <!-- PROFESSIONAL TEMPLATE -->
+  <script id="professional-template" type="text/x-handlebars-template">
+    <div class="w-full h-full flex" style="font-family: 'Open Sans', sans-serif;">
+      <div class="w-1/3 bg-gray-100 p-10">
+        <div class="text-left mb-12">
+          <h1 class="text-4xl font-light text-gray-800" style="font-family: 'Raleway', sans-serif;">{{#if personal.name}}{{personal.name}}{{else}}Your Name{{/if}}</h1>
+        </div>
+        <div class="space-y-8">
+          <div>
+            <h2 class="text-lg font-semibold text-gray-700 border-b-2 border-gray-300 pb-2 mb-4 uppercase tracking-wider" style="font-family: 'Raleway', sans-serif;">Contact</h2>
+            <div class="text-gray-600 space-y-2 text-sm">
+              {{#if personal.email}}<div><a href="mailto:{{personal.email}}" class="text-blue-600 hover:text-blue-800">{{personal.email}}</a></div>{{/if}}
+              {{#if personal.phone}}<div>{{personal.phone}}</div>{{/if}}
+              {{#if personal.linkedin}}<div><a href="{{personal.linkedin}}" target="_blank" class="text-blue-600 hover:text-blue-800">{{personal.linkedin}}</a></div>{{/if}}
+              {{#if personal.github}}<div><a href="{{personal.github}}" target="_blank" class="text-blue-600 hover:text-blue-800">{{personal.github}}</a></div>{{/if}}
+            </div>
+          </div>
+          {{#if skills}}
+          <div>
+            <h2 class="text-lg font-semibold text-gray-700 border-b-2 border-gray-300 pb-2 mb-4 uppercase tracking-wider" style="font-family: 'Raleway', sans-serif;">Skills</h2>
+            <div class="flex flex-wrap gap-2">
+              {{#each skills}}
+              <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm">{{this}}</span>
+              {{/each}}
+            </div>
+          </div>
+          {{/if}}
+          {{#if education}}
+          <div>
+            <h2 class="text-lg font-semibold text-gray-700 border-b-2 border-gray-300 pb-2 mb-4 uppercase tracking-wider" style="font-family: 'Raleway', sans-serif;">Education</h2>
+            <div class="space-y-4">
+              {{#each education}}
+              <div>
+                <h3 class="text-md font-semibold text-gray-800" style="font-family: 'Raleway', sans-serif;">{{#if degree}}{{degree}}{{else}}Degree{{/if}}</h3>
+                <p class="text-sm text-gray-600">{{#if school}}{{school}}{{else}}Institution{{/if}}</p>
+                <p class="text-sm text-gray-500">{{#if year}}{{year}}{{else}}Year{{/if}}</p>
+              </div>
+              {{/each}}
+            </div>
+          </div>
+          {{/if}}
+        </div>
+      </div>
+      <div class="w-2/3 bg-white p-12 overflow-y-auto">
+        {{#if summary}}
+        <div class="mb-10">
+          <p class="text-gray-700 text-lg leading-relaxed">{{summary}}</p>
+        </div>
+        {{/if}}
+        {{#if experience}}
+        <div class="mb-10">
+          <h2 class="text-2xl font-light text-gray-800 border-b-2 border-gray-200 pb-3 mb-6 uppercase tracking-widest" style="font-family: 'Raleway', sans-serif;">Experience</h2>
+          <div class="space-y-8">
+            {{#each experience}}
+            <div>
+              <div class="flex justify-between items-baseline">
+                <h3 class="text-xl font-semibold text-gray-900" style="font-family: 'Raleway', sans-serif;">{{#if title}}{{title}}{{else}}Job Title{{/if}}</h3>
+                <span class="text-sm font-medium text-gray-500">{{#if startDate}}{{startDate}}{{else}}Start{{/if}} — {{#if endDate}}{{endDate}}{{else}}End{{/if}}</span>
+              </div>
+              <h4 class="text-lg text-gray-700 mb-2">{{#if company}}{{company}}{{else}}Company{{/if}}</h4>
+              <p class="text-gray-600">{{#if description}}{{description}}{{else}}A description of your role and accomplishments.{{/if}}</p>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+  </script>
+
+  <!-- ELEGANT TEMPLATE -->
+  <script id="elegant-template" type="text/x-handlebars-template">
+    <div class="w-full h-full bg-white p-16" style="font-family: 'Source Sans Pro', sans-serif;">
+      <header class="text-center mb-12">
+        <h1 class="text-6xl text-gray-800" style="font-family: 'Playfair Display', serif;">{{#if personal.name}}{{personal.name}}{{else}}Your Name{{/if}}</h1>
+        <div class="flex justify-center gap-x-6 gap-y-2 mt-6 text-lg text-gray-600 flex-wrap">
+          {{#if personal.email}}<a href="mailto:{{personal.email}}" class="hover:text-gray-900">{{personal.email}}</a>{{/if}}
+          {{#if personal.phone}}<span>{{personal.phone}}</span>{{/if}}
+          {{#if personal.linkedin}}<a href="{{personal.linkedin}}" target="_blank" class="hover:text-gray-900">{{personal.linkedin}}</a>{{/if}}
+          {{#if personal.github}}<a href="{{personal.github}}" target="_blank" class="hover:text-gray-900">{{personal.github}}</a>{{/if}}
+        </div>
+      </header>
+      {{#if summary}}
+      <div class="mb-12 border-y-2 border-gray-200 py-6">
+        <p class="text-center text-xl text-gray-700 leading-relaxed italic">{{summary}}</p>
+      </div>
+      {{/if}}
+      <div class="grid grid-cols-3 gap-12">
+        <div class="col-span-2 space-y-12">
+          {{#if experience}}
+          <section>
+            <h2 class="text-3xl text-gray-800 mb-6 pb-2 border-b-2 border-gray-200" style="font-family: 'Playfair Display', serif;">Experience</h2>
+            <div class="space-y-8">
+              {{#each experience}}
+              <div>
+                <div class="flex justify-between items-baseline mb-1">
+                  <h3 class="text-2xl text-gray-900" style="font-family: 'Playfair Display', serif;">{{#if title}}{{title}}{{else}}Job Title{{/if}}</h3>
+                   <span class="text-sm font-medium text-gray-500">{{#if startDate}}{{startDate}}{{else}}Start{{/if}} — {{#if endDate}}{{endDate}}{{else}}End{{/if}}</span>
+                </div>
+                <h4 class="text-lg text-gray-700 mb-2">{{#if company}}{{company}}{{else}}Company{{/if}}</h4>
+                <p class="text-gray-600 leading-relaxed">{{#if description}}{{description}}{{else}}A description of your role and accomplishments.{{/if}}</p>
+              </div>
+              {{/each}}
+            </div>
+          </section>
+          {{/if}}
+        </div>
+        <div class="col-span-1 space-y-12">
+          {{#if education}}
+          <section>
+            <h2 class="text-3xl text-gray-800 mb-6 pb-2 border-b-2 border-gray-200" style="font-family: 'Playfair Display', serif;">Education</h2>
+            <div class="space-y-6">
+              {{#each education}}
+              <div>
+                <h3 class="text-xl text-gray-900" style="font-family: 'Playfair Display', serif;">{{#if degree}}{{degree}}{{else}}Degree{{/if}}</h3>
+                <p class="text-gray-700">{{#if school}}{{school}}{{else}}Institution{{/if}}</p>
+                <p class="text-sm text-gray-500">{{#if year}}{{year}}{{else}}Year{{/if}}</p>
+              </div>
+              {{/each}}
+            </div>
+          </section>
+          {{/if}}
+          {{#if skills}}
+          <section>
+            <h2 class="text-3xl text-gray-800 mb-6 pb-2 border-b-2 border-gray-200" style="font-family: 'Playfair Display', serif;">Skills</h2>
+            <div class="flex flex-wrap gap-2">
+              {{#each skills}}
+              <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded text-sm">{{this}}</span>
+              {{/each}}
+            </div>
+          </section>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <!-- IMPACT TEMPLATE -->
+  <script id="impact-template" type="text/x-handlebars-template">
+    <div class="w-full h-full bg-white text-gray-900 p-16" style="font-family: 'Lora', serif;">
+      <header class="text-center mb-16">
+        <h1 class="text-7xl font-bold uppercase tracking-wider text-gray-900" style="font-family: 'Roboto', sans-serif;">{{#if personal.name}}{{personal.name}}{{else}}Your Name{{/if}}</h1>
+        <div class="flex justify-center gap-x-8 gap-y-2 mt-6 text-lg text-gray-600 flex-wrap">
+          {{#if personal.email}}<a href="mailto:{{personal.email}}" class="hover:text-gray-900">{{personal.email}}</a>{{/if}}
+          {{#if personal.phone}}<span>{{personal.phone}}</span>{{/if}}
+          {{#if personal.linkedin}}<a href="{{personal.linkedin}}" target="_blank" class="hover:text-gray-900">{{personal.linkedin}}</a>{{/if}}
+          {{#if personal.github}}<a href="{{personal.github}}" target="_blank" class="hover:text-gray-900">{{personal.github}}</a>{{/if}}
+        </div>
+      </header>
+      <div class="space-y-12">
+        {{#if summary}}
+        <section class="text-center">
+          <p class="text-2xl text-gray-700 leading-loose">{{summary}}</p>
+        </section>
+        {{/if}}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+          <div class="space-y-12">
+            {{#if experience}}
+            <section>
+              <h2 class="text-3xl font-bold text-gray-900 mb-6 uppercase tracking-widest border-b-2 border-blue-600 pb-2" style="font-family: 'Roboto', sans-serif;">Experience</h2>
+              <div class="space-y-8">
+                {{#each experience}}
+                <div>
+                  <h3 class="text-2xl font-bold text-gray-900" style="font-family: 'Roboto', sans-serif;">{{#if title}}{{title}}{{else}}Job Title{{/if}}</h3>
+                  <div class="flex justify-between text-blue-700 mb-2">
+                    <p class="text-lg">{{#if company}}{{company}}{{else}}Company{{/if}}</p>
+                    <p class="text-nowrap">{{#if startDate}}{{startDate}}{{else}}Start{{/if}}—{{#if endDate}}{{endDate}}{{else}}End{{/if}}</p>
+                  </div>
+                  <p class="text-gray-600">{{#if description}}{{description}}{{else}}A description of your role and accomplishments.{{/if}}</p>
+                </div>
+                {{/each}}
+              </div>
+            </section>
+            {{/if}}
+          </div>
+          <div class="space-y-12">
+            {{#if education}}
+            <section>
+              <h2 class="text-3xl font-bold text-gray-900 mb-6 uppercase tracking-widest border-b-2 border-blue-600 pb-2" style="font-family: 'Roboto', sans-serif;">Education</h2>
+              <div class="space-y-6">
+                {{#each education}}
+                <div>
+                  <h3 class="text-2xl font-bold text-gray-900" style="font-family: 'Roboto', sans-serif;">{{#if degree}}{{degree}}{{else}}Degree{{/if}}</h3>
+                  <div class="flex justify-between text-blue-700">
+                    <p class="text-lg">{{#if school}}{{school}}{{else}}Institution{{/if}}</p>
+                    <p>{{#if year}}{{year}}{{else}}Year{{/if}}</p>
+                  </div>
+                </div>
+                {{/each}}
+              </div>
+            </section>
+            {{/if}}
+            {{#if skills}}
+            <section>
+              <h2 class="text-3xl font-bold text-gray-900 mb-6 uppercase tracking-widest border-b-2 border-blue-600 pb-2" style="font-family: 'Roboto', sans-serif;">Skills</h2>
+              <div class="flex flex-wrap gap-4">
+                {{#each skills}}
+                <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg text-lg">{{this}}</span>
+                {{/each}}
+              </div>
+            </section>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <!-- REFINED TEMPLATE -->
+  <script id="refined-template" type="text/x-handlebars-template">
+    <div class="w-full h-full bg-gray-50 p-20" style="font-family: 'Fira Sans', sans-serif;">
+      <header class="mb-16">
+        <h1 class="text-6xl font-bold text-gray-900" style="font-family: 'Cormorant Garamond', serif;">{{#if personal.name}}{{personal.name}}{{else}}Your Name{{/if}}</h1>
+        <div class="border-t-2 border-gray-800 mt-4 pt-4 text-lg text-gray-600 space-x-6">
+          {{#if personal.email}}<a href="mailto:{{personal.email}}" class="text-blue-800 hover:underline">{{personal.email}}</a>{{/if}}
+          {{#if personal.phone}}<span>{{personal.phone}}</span>{{/if}}
+          {{#if personal.linkedin}}<a href="{{personal.linkedin}}" target="_blank" class="text-blue-800 hover:underline">{{personal.linkedin}}</a>{{/if}}
+          {{#if personal.github}}<a href="{{personal.github}}" target="_blank" class="text-blue-800 hover:underline">{{personal.github}}</a>{{/if}}
+        </div>
+      </header>
+      <main class="space-y-12">
+        {{#if summary}}
+        <section>
+          <p class="text-xl text-gray-700 leading-relaxed" style="text-indent: 3rem;">{{summary}}</p>
+        </section>
+        {{/if}}
+        {{#if experience}}
+        <section>
+          <h2 class="text-3xl font-bold text-gray-800 mb-6 uppercase tracking-wider" style="font-family: 'Cormorant Garamond', serif;">Experience</h2>
+          <div class="space-y-8 border-l-2 border-gray-300 pl-8">
+            {{#each experience}}
+            <div class="relative">
+              <div class="absolute -left-9 top-1 w-2 h-2 bg-gray-800 rounded-full"></div>
+              <h3 class="text-2xl font-bold text-gray-900" style="font-family: 'Cormorant Garamond', serif;">{{#if title}}{{title}}{{else}}Job Title{{/if}}</h3>
+              <div class="flex justify-between text-gray-600 mb-2">
+                <p class="text-lg italic">{{#if company}}{{company}}{{else}}Company{{/if}}</p>
+                <p class="text-md">{{#if startDate}}{{startDate}}{{else}}Start{{/if}} — {{#if endDate}}{{endDate}}{{else}}End{{/if}}</p>
+              </div>
+              <p class="text-gray-700">{{#if description}}{{description}}{{else}}A description of your role and accomplishments.{{/if}}</p>
+            </div>
+            {{/each}}
+          </div>
+        </section>
+        {{/if}}
+        <div class="grid grid-cols-2 gap-12">
+          {{#if education}}
+          <section>
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 uppercase tracking-wider" style="font-family: 'Cormorant Garamond', serif;">Education</h2>
+            <div class="space-y-6">
+              {{#each education}}
+              <div>
+                <h3 class="text-xl font-bold text-gray-900" style="font-family: 'Cormorant Garamond', serif;">{{#if degree}}{{degree}}{{else}}Degree{{/if}}</h3>
+                <p class="text-lg italic text-gray-600">{{#if school}}{{school}}{{else}}Institution{{/if}}</p>
+                <p class="text-md text-gray-500">{{#if year}}{{year}}{{else}}Year{{/if}}</p>
+              </div>
+              {{/each}}
+            </div>
+          </section>
+          {{/if}}
+          {{#if skills}}
+          <section>
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 uppercase tracking-wider" style="font-family: 'Cormorant Garamond', serif;">Skills</h2>
+            <div class="flex flex-wrap gap-2">
+              {{#each skills}}
+              <span class="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm">{{this}}</span>
+              {{/each}}
+            </div>
+          </section>
+          {{/if}}
+        </div>
+      </main>
+    </div>
+  </script>
+
+  <!-- AIRY TEMPLATE -->
+  <script id="airy-template" type="text/x-handlebars-template">
+    <div class="w-full h-full bg-white p-20" style="font-family: 'Noto Serif', serif;">
+        <div class="grid grid-cols-3 gap-16 h-full">
+            <div class="col-span-1 border-r-2 border-gray-100 pr-12 flex flex-col justify-between">
+              <div>
+                <h1 class="text-5xl font-light mb-12" style="font-family: 'Oxygen', sans-serif;">{{#if personal.name}}{{personal.name}}{{else}}Your Name{{/if}}</h1>
+                {{#if summary}}
+                <p class="text-gray-600 leading-relaxed mb-12">{{summary}}</p>
+                {{/if}}
+              </div>
+              <div class="space-y-8">
+                {{#if education}}
+                <section>
+                  <h2 class="text-2xl font-light text-gray-800 mb-4 uppercase tracking-widest" style="font-family: 'Oxygen', sans-serif;">Education</h2>
+                  <div class="space-y-4">
+                    {{#each education}}
+                    <div>
+                      <h3 class="text-lg font-semibold text-gray-900">{{#if degree}}{{degree}}{{else}}Degree{{/if}}</h3>
+                      <p class="text-gray-700">{{#if school}}{{school}}{{else}}Institution{{/if}}</p>
+                      <p class="text-sm text-gray-500">{{#if year}}{{year}}{{else}}Year{{/if}}</p>
+                    </div>
+                    {{/each}}
+                  </div>
+                </section>
+                {{/if}}
+                {{#if skills}}
+                <section>
+                  <h2 class="text-2xl font-light text-gray-800 mb-4 uppercase tracking-widest" style="font-family: 'Oxygen', sans-serif;">Skills</h2>
+                  <div class="flex flex-wrap gap-2">
+                    {{#each skills}}
+                    <span class="text-gray-700 border border-gray-300 px-3 py-1 rounded-full text-sm">{{this}}</span>
+                    {{/each}}
+                  </div>
+                </section>
+                {{/if}}
+                <section>
+                  <h2 class="text-2xl font-light text-gray-800 mb-4 uppercase tracking-widest" style="font-family: 'Oxygen', sans-serif;">Contact</h2>
+                  <div class="text-gray-600 space-y-1 text-sm">
+                    {{#if personal.email}}<div><a href="mailto:{{personal.email}}" class="text-blue-700 hover:underline">{{personal.email}}</a></div>{{/if}}
+                    {{#if personal.phone}}<div>{{personal.phone}}</div>{{/if}}
+                    {{#if personal.linkedin}}<div><a href="{{personal.linkedin}}" target="_blank" class="text-blue-700 hover:underline">{{personal.linkedin}}</a></div>{{/if}}
+                    {{#if personal.github}}<div><a href="{{personal.github}}" target="_blank" class="text-blue-700 hover:underline">{{personal.github}}</a></div>{{/if}}
+                  </div>
+                </section>
+              </div>
+            </div>
+            <div class="col-span-2 pl-4">
+              {{#if experience}}
+              <section>
+                <h2 class="text-4xl font-light text-gray-800 mb-8 uppercase tracking-widest" style="font-family: 'Oxygen', sans-serif;">Experience</h2>
+                <div class="space-y-10">
+                  {{#each experience}}
+                  <div>
+                    <div class="flex justify-between items-baseline mb-1">
+                      <h3 class="text-2xl font-semibold text-gray-900">{{#if title}}{{title}}{{else}}Job Title{{/if}}</h3>
+                      <p class="text-sm text-gray-500">{{#if startDate}}{{startDate}}{{else}}Start{{/if}} — {{#if endDate}}{{endDate}}{{else}}End{{/if}}</p>
+                    </div>
+                    <h4 class="text-xl text-gray-700 mb-3">{{#if company}}{{company}}{{else}}Company{{/if}}</h4>
+                    <p class="text-gray-600 leading-relaxed">{{#if description}}{{description}}{{else}}A description of your role and accomplishments.{{/if}}</p>
+                  </div>
+                  {{/each}}
+                </div>
+              </section>
+              {{/if}}
+            </div>
+        </div>
+    </div>
+  </script>
+
+  <!-- EXECUTIVE TEMPLATE -->
+  <script id="executive-template" type="text/x-handlebars-template">
+    <div class="w-full h-full bg-white p-12" style="font-family: 'Inter', sans-serif;">
+      <header class="border-b-4 border-blue-800 pb-8 mb-12">
+        <div class="flex justify-between items-end">
+          <div>
+            <h1 class="text-5xl font-bold text-gray-900" style="font-family: 'Inter', sans-serif;">{{#if personal.name}}{{personal.name}}{{else}}Your Name{{/if}}</h1>
+            <div class="mt-4 text-lg text-gray-600 space-y-1">
+              {{#if personal.email}}<div><a href="mailto:{{personal.email}}" class="text-blue-800 hover:underline">{{personal.email}}</a></div>{{/if}}
+              {{#if personal.phone}}<div>{{personal.phone}}</div>{{/if}}
+            </div>
+          </div>
+          <div class="text-right text-lg text-gray-600 space-y-1">
+            {{#if personal.linkedin}}<div><a href="{{personal.linkedin}}" target="_blank" class="text-blue-800 hover:underline">{{personal.linkedin}}</a></div>{{/if}}
+            {{#if personal.github}}<div><a href="{{personal.github}}" target="_blank" class="text-blue-800 hover:underline">{{personal.github}}</a></div>{{/if}}
+          </div>
+        </div>
+      </header>
+
+      {{#if summary}}
+      <section class="mb-12">
+        <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-800">
+          <h2 class="text-2xl font-bold text-blue-900 mb-4 uppercase tracking-wider">Executive Summary</h2>
+          <p class="text-gray-700 text-lg leading-relaxed">{{summary}}</p>
+        </div>
+      </section>
+      {{/if}}
+
+      <div class="grid grid-cols-3 gap-12">
+        <div class="col-span-2">
+          {{#if experience}}
+          <section class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 uppercase tracking-wider border-b-2 border-gray-200 pb-2">Professional Experience</h2>
+            <div class="space-y-10">
+              {{#each experience}}
+              <div class="bg-white border-l-4 border-blue-800 pl-6 py-2">
+                <div class="flex justify-between items-baseline mb-2">
+                  <h3 class="text-2xl font-bold text-gray-900">{{#if title}}{{title}}{{else}}Job Title{{/if}}</h3>
+                  <span class="text-sm font-semibold text-blue-800 bg-blue-100 px-3 py-1 rounded">{{#if startDate}}{{startDate}}{{else}}Start{{/if}} — {{#if endDate}}{{endDate}}{{else}}End{{/if}}</span>
+                </div>
+                <h4 class="text-xl font-semibold text-gray-700 mb-3">{{#if company}}{{company}}{{else}}Company{{/if}}</h4>
+                <p class="text-gray-600 leading-relaxed">{{#if description}}{{description}}{{else}}A description of your role and accomplishments.{{/if}}</p>
+              </div>
+              {{/each}}
+            </div>
+          </section>
+          {{/if}}
+        </div>
+
+        <div class="col-span-1 space-y-10">
+          {{#if education}}
+          <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 uppercase tracking-wider">Education</h2>
+            <div class="space-y-6">
+              {{#each education}}
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <h3 class="text-lg font-bold text-gray-900">{{#if degree}}{{degree}}{{else}}Degree{{/if}}</h3>
+                <p class="text-gray-700 font-semibold">{{#if school}}{{school}}{{else}}Institution{{/if}}</p>
+                <p class="text-sm text-gray-500">{{#if year}}{{year}}{{else}}Year{{/if}}</p>
+              </div>
+              {{/each}}
+            </div>
+          </section>
+          {{/if}}
+
+          {{#if skills}}
+          <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 uppercase tracking-wider">Core Competencies</h2>
+            <div class="flex flex-wrap gap-2">
+              {{#each skills}}
+              <span class="bg-blue-100 text-blue-900 px-3 py-1 rounded-full text-sm font-semibold">{{this}}</span>
+              {{/each}}
+            </div>
+          </section>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <!-- VIBRANT TEMPLATE -->
+  <script id="vibrant-template" type="text/x-handlebars-template">
+    <div class="w-full h-full bg-gradient-to-br from-purple-50 to-pink-50 p-16" style="font-family: 'Open Sans', sans-serif;">
+      <header class="text-center mb-16">
+        <h1 class="text-6xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent" style="font-family: 'Raleway', sans-serif;">{{#if personal.name}}{{personal.name}}{{else}}Your Name{{/if}}</h1>
+        <div class="flex justify-center gap-x-8 gap-y-2 mt-6 text-lg flex-wrap">
+          {{#if personal.email}}<a href="mailto:{{personal.email}}" class="text-purple-700 hover:text-purple-900 font-medium">{{personal.email}}</a>{{/if}}
+          {{#if personal.phone}}<span class="text-gray-700">{{personal.phone}}</span>{{/if}}
+          {{#if personal.linkedin}}<a href="{{personal.linkedin}}" target="_blank" class="text-purple-700 hover:text-purple-900 font-medium">{{personal.linkedin}}</a>{{/if}}
+          {{#if personal.github}}<a href="{{personal.github}}" target="_blank" class="text-purple-700 hover:text-purple-900 font-medium">{{personal.github}}</a>{{/if}}
+        </div>
+      </header>
+
+      {{#if summary}}
+      <section class="mb-16">
+        <div class="bg-white bg-opacity-70 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-purple-200">
+          <p class="text-center text-xl text-gray-700 leading-relaxed italic">{{summary}}</p>
+        </div>
+      </section>
+      {{/if}}
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2 space-y-12">
+          {{#if experience}}
+          <section>
+            <h2 class="text-4xl font-bold text-purple-800 mb-8 text-center" style="font-family: 'Raleway', sans-serif;">Experience</h2>
+            <div class="space-y-8">
+              {{#each experience}}
+              <div class="bg-white bg-opacity-70 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-pink-200">
+                <div class="flex justify-between items-baseline mb-2">
+                  <h3 class="text-2xl font-bold text-purple-900" style="font-family: 'Raleway', sans-serif;">{{#if title}}{{title}}{{else}}Job Title{{/if}}</h3>
+                  <span class="text-sm font-medium text-purple-600 bg-purple-100 px-3 py-1 rounded-full">{{#if startDate}}{{startDate}}{{else}}Start{{/if}} — {{#if endDate}}{{endDate}}{{else}}End{{/if}}</span>
+                </div>
+                <h4 class="text-lg font-semibold text-pink-700 mb-3">{{#if company}}{{company}}{{else}}Company{{/if}}</h4>
+                <p class="text-gray-700 leading-relaxed">{{#if description}}{{description}}{{else}}A description of your role and accomplishments.{{/if}}</p>
+              </div>
+              {{/each}}
+            </div>
+          </section>
+          {{/if}}
+        </div>
+
+        <div class="lg:col-span-1 space-y-12">
+          {{#if education}}
+          <section>
+            <h2 class="text-3xl font-bold text-purple-800 mb-6 text-center" style="font-family: 'Raleway', sans-serif;">Education</h2>
+            <div class="space-y-6">
+              {{#each education}}
+              <div class="bg-white bg-opacity-70 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-purple-200">
+                <h3 class="text-lg font-bold text-purple-900">{{#if degree}}{{degree}}{{else}}Degree{{/if}}</h3>
+                <p class="text-purple-700 font-semibold">{{#if school}}{{school}}{{else}}Institution{{/if}}</p>
+                <p class="text-sm text-gray-600">{{#if year}}{{year}}{{else}}Year{{/if}}</p>
+              </div>
+              {{/each}}
+            </div>
+          </section>
+          {{/if}}
+
+          {{#if skills}}
+          <section>
+            <h2 class="text-3xl font-bold text-purple-800 mb-6 text-center" style="font-family: 'Raleway', sans-serif;">Skills</h2>
+            <div class="flex flex-wrap gap-3">
+              {{#each skills}}
+              <span class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full text-sm font-medium">{{this}}</span>
+              {{/each}}
+            </div>
+          </section>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <!-- MODERN SERIF TEMPLATE -->
+  <script id="modern-serif-template" type="text/x-handlebars-template">
+    <div class="w-full h-full bg-stone-50 p-16" style="font-family: 'Noto Serif', serif;">
+      <div class="max-w-5xl mx-auto">
+        <header class="mb-16">
+          <div class="flex items-center justify-between border-b-4 border-stone-800 pb-6">
+            <div>
+              <h1 class="text-5xl font-bold text-stone-900" style="font-family: 'Lora', serif;">{{#if personal.name}}{{personal.name}}{{else}}Your Name{{/if}}</h1>
+              <div class="mt-4 space-y-1 text-lg text-stone-600">
+                {{#if personal.email}}<div><a href="mailto:{{personal.email}}" class="text-stone-800 hover:underline">{{personal.email}}</a></div>{{/if}}
+                {{#if personal.phone}}<div>{{personal.phone}}</div>{{/if}}
+              </div>
+            </div>
+            <div class="text-right space-y-1 text-lg text-stone-600">
+              {{#if personal.linkedin}}<div><a href="{{personal.linkedin}}" target="_blank" class="text-stone-800 hover:underline">{{personal.linkedin}}</a></div>{{/if}}
+              {{#if personal.github}}<div><a href="{{personal.github}}" target="_blank" class="text-stone-800 hover:underline">{{personal.github}}</a></div>{{/if}}
+            </div>
+          </div>
+        </header>
+
+        {{#if summary}}
+        <section class="mb-16">
+          <blockquote class="text-center text-2xl text-stone-700 leading-loose italic border-l-4 border-stone-400 pl-8 bg-stone-100 p-8 rounded-r-lg">
+            "{{summary}}"
+          </blockquote>
+        </section>
+        {{/if}}
+
+        <div class="grid grid-cols-4 gap-12">
+          <div class="col-span-3">
+            {{#if experience}}
+            <section>
+              <h2 class="text-3xl font-bold text-stone-900 mb-8 tracking-wide" style="font-family: 'Lora', serif;">Professional Experience</h2>
+              <div class="space-y-10">
+                {{#each experience}}
+                <article class="border-l-2 border-stone-300 pl-8 relative">
+                  <div class="absolute -left-2.5 top-2 w-5 h-5 bg-stone-800 rounded-full"></div>
+                  <header class="mb-3">
+                    <div class="flex justify-between items-baseline">
+                      <h3 class="text-2xl font-bold text-stone-900" style="font-family: 'Lora', serif;">{{#if title}}{{title}}{{else}}Job Title{{/if}}</h3>
+                      <time class="text-sm text-stone-500 bg-stone-200 px-3 py-1 rounded" style="font-family: 'Fira Sans', sans-serif;">{{#if startDate}}{{startDate}}{{else}}Start{{/if}} — {{#if endDate}}{{endDate}}{{else}}End{{/if}}</time>
+                    </div>
+                    <h4 class="text-xl text-stone-700 mt-1 italic">{{#if company}}{{company}}{{else}}Company{{/if}}</h4>
+                  </header>
+                  <p class="text-stone-600 leading-relaxed text-lg">{{#if description}}{{description}}{{else}}A description of your role and accomplishments.{{/if}}</p>
+                </article>
+                {{/each}}
+              </div>
+            </section>
+            {{/if}}
+          </div>
+
+          <div class="col-span-1 space-y-12">
+            {{#if education}}
+            <section>
+              <h2 class="text-2xl font-bold text-stone-900 mb-6" style="font-family: 'Lora', serif;">Education</h2>
+              <div class="space-y-6">
+                {{#each education}}
+                <div class="bg-white p-4 rounded-lg shadow-sm border border-stone-200">
+                  <h3 class="text-lg font-bold text-stone-900" style="font-family: 'Lora', serif;">{{#if degree}}{{degree}}{{else}}Degree{{/if}}</h3>
+                  <p class="text-stone-700 font-medium">{{#if school}}{{school}}{{else}}Institution{{/if}}</p>
+                  <p class="text-sm text-stone-500">{{#if year}}{{year}}{{else}}Year{{/if}}</p>
+                </div>
+                {{/each}}
+              </div>
+            </section>
+            {{/if}}
+
+            {{#if skills}}
+            <section>
+              <h2 class="text-2xl font-bold text-stone-900 mb-6" style="font-family: 'Lora', serif;">Skills</h2>
+              <div class="flex flex-wrap gap-2">
+                {{#each skills}}
+                <span class="bg-stone-200 text-stone-800 px-3 py-1 rounded-full text-sm font-medium border border-stone-300">{{this}}</span>
+                {{/each}}
+              </div>
+            </section>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+
 </body>
 
 </html>

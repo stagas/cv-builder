@@ -3,6 +3,53 @@ document.addEventListener('DOMContentLoaded', function() {
   const cvContainer = document.getElementById('cv-container')
   const exportPdfBtn = document.getElementById('export-pdf-btn')
   const previewWrapper = document.getElementById('preview-wrapper')
+  const stylePicker = document.getElementById('style-picker')
+
+  const templates = {
+    formal: Handlebars.compile(
+      document.getElementById('formal-template').innerHTML,
+    ),
+    modern: Handlebars.compile(
+      document.getElementById('modern-template').innerHTML,
+    ),
+    creative: Handlebars.compile(
+      document.getElementById('creative-template').innerHTML,
+    ),
+    minimalist: Handlebars.compile(
+      document.getElementById('minimalist-template').innerHTML,
+    ),
+    academic: Handlebars.compile(
+      document.getElementById('academic-template').innerHTML,
+    ),
+    professional: Handlebars.compile(
+      document.getElementById('professional-template').innerHTML,
+    ),
+    elegant: Handlebars.compile(
+      document.getElementById('elegant-template').innerHTML,
+    ),
+    impact: Handlebars.compile(
+      document.getElementById('impact-template').innerHTML,
+    ),
+    refined: Handlebars.compile(
+      document.getElementById('refined-template').innerHTML,
+    ),
+    airy: Handlebars.compile(
+      document.getElementById('airy-template').innerHTML,
+    ),
+    executive: Handlebars.compile(
+      document.getElementById('executive-template').innerHTML,
+    ),
+    vibrant: Handlebars.compile(
+      document.getElementById('vibrant-template').innerHTML,
+    ),
+    'modern-serif': Handlebars.compile(
+      document.getElementById('modern-serif-template').innerHTML,
+    ),
+  }
+
+  Handlebars.registerHelper('join', function(arr, sep) {
+    return arr.join(sep)
+  })
 
   let cvData
 
@@ -23,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
       experience: [],
       education: [],
       skills: [],
+      style: 'formal',
     }
 
     // Populate simple fields
@@ -32,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     document.getElementById('summary').value = cvData.summary
     document.getElementById('skills').value = cvData.skills.join(', ')
+    stylePicker.value = cvData.style
 
     // Populate dynamic fields
     document.getElementById('experience-list').innerHTML = ''
@@ -51,165 +100,10 @@ document.addEventListener('DOMContentLoaded', function() {
       return
     }
 
-    cvContainer.innerHTML = `
-        <div class="p-16 h-full w-full">
-            <div class="relative h-full w-full">
-                <!-- Sophisticated Background Pattern -->
-                <div class="absolute inset-0 opacity-5">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1200 1600" preserveAspectRatio="xMidYMid slice">
-                        <!-- Geometric background pattern -->
-                        <defs>
-                            <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
-                                <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#1f2937" stroke-width="1"/>
-                            </pattern>
-                            <pattern id="dots" width="60" height="60" patternUnits="userSpaceOnUse">
-                                <circle cx="30" cy="30" r="2" fill="#374151"/>
-                            </pattern>
-                        </defs>
-                        <rect width="100%" height="100%" fill="url(#grid)"/>
-                        <rect width="100%" height="100%" fill="url(#dots)"/>
-
-                        <!-- Subtle diagonal lines -->
-                        <g stroke="#6b7280" stroke-width="0.5" opacity="0.3">
-                            <line x1="0" y1="0" x2="1200" y2="400"/>
-                            <line x1="0" y1="200" x2="1200" y2="600"/>
-                            <line x1="0" y1="400" x2="1200" y2="800"/>
-                            <line x1="0" y1="600" x2="1200" y2="1000"/>
-                            <line x1="0" y1="800" x2="1200" y2="1200"/>
-                            <line x1="0" y1="1000" x2="1200" y2="1400"/>
-                            <line x1="0" y1="1200" x2="1200" y2="1600"/>
-                        </g>
-                    </svg>
-                </div>
-
-                <!-- Header with accent bar -->
-                <div class="relative z-10">
-                    <div class="border-l-8 border-slate-800 pl-8 mb-12">
-                        <h1 class="text-5xl font-light text-slate-900 mb-2" style="font-family: 'Chivo', sans-serif; font-weight: 300;">${
-      cvData.personal.name || 'Your Name'
-    }</h1>
-                        <div class="text-slate-600 text-lg space-y-1" style="font-family: 'Chivo', sans-serif; font-weight: 300;">
-                            ${
-      cvData.personal.email
-        ? `<div class="text-blue-700"><a href="mailto:${cvData.personal.email}" target="_blank">${cvData.personal.email}</a></div>`
-        : ''
+    const template = templates[cvData.style]
+    if (template) {
+      cvContainer.innerHTML = template(cvData)
     }
-                            ${
-      cvData.personal.phone ? `<div>${cvData.personal.phone}</div>` : ''
-    }
-                            ${
-      cvData.personal.linkedin
-        ? `<div class="text-blue-700">${cvData.personal.linkedin}</div>`
-        : ''
-    }
-                            ${
-      cvData.personal.github
-        ? `<div class="text-blue-700"><a href="${cvData.personal.github}" target="_blank">${cvData.personal.github}</a></div>`
-        : ''
-    }
-                        </div>
-                    </div>
-
-                    <!-- Professional Summary -->
-                    ${
-      cvData.summary
-        ? `
-                    <div class="mb-10">
-                        <div class="bg-slate-50 p-6 rounded-lg border-l-4 border-slate-300">
-                            <p class="text-slate-700 leading-relaxed text-lg" style="font-family: 'Chivo', sans-serif; font-weight: 300;">${cvData.summary}</p>
-                        </div>
-                    </div>
-                    `
-        : ''
-    }
-
-                    <!-- Work Experience -->
-                    ${
-      cvData.experience.length > 0
-        ? `
-                    <div class="mb-10">
-                        <h2 class="text-2xl font-semibold text-slate-900 mb-6 pb-2 border-b-2 border-slate-200" style="font-family: 'Crimson Text', serif;">Professional Experience</h2>
-                        <div class="space-y-8">
-                            ${
-          cvData.experience.map(exp => `
-                                <div class="relative pl-8 border-l-2 border-slate-200">
-                                    <div class="absolute w-4 h-4 bg-slate-400 rounded-full -left-2 top-1"></div>
-                                    <div class="flex justify-between items-start mb-2">
-                                        <div>
-                                            <h3 class="text-2xl -mt-1 font-semibold text-slate-900" style="font-family: 'Crimson Text', serif;">${
-            exp.title || 'Job Title'
-          }</h3>
-                                            <h4 class="text-lg text-slate-700 font-medium" style="font-family: 'Chivo', sans-serif;">${
-            exp.company || 'Company'
-          }</h4>
-                                        </div>
-                                        <span class="text-sm text-slate-500 bg-slate-100 px-3 py-1 rounded-full" style="font-family: 'Chivo', sans-serif; font-weight: 300;">${
-            exp.startDate || 'Start'
-          } — ${exp.endDate || 'End'}</span>
-                                    </div>
-                                    <p class="text-slate-600 leading-relaxed" style="font-family: 'Chivo', sans-serif; font-weight: 300;">${
-            exp.description || 'A description of your role and accomplishments.'
-          }</p>
-                                </div>
-                            `).join('')
-        }
-                        </div>
-                    </div>
-                    `
-        : ''
-    }
-
-                    <!-- Education -->
-                    ${
-      cvData.education.length > 0
-        ? `
-                    <div class="mb-10">
-                        <h2 class="text-2xl font-semibold text-slate-900 mb-6 pb-2 border-b-2 border-slate-200" style="font-family: 'Crimson Text', serif;">Education</h2>
-                        <div class="space-y-6">
-                            ${
-          cvData.education.map(edu => `
-                                <div>
-                                    <h3 class="text-xl font-semibold text-slate-900 mb-1" style="font-family: 'Crimson Text', serif;">${
-            edu.degree || 'Degree'
-          }${edu.field ? ` in ${edu.field}` : ''}</h3>
-                                    <div class="flex justify-between items-center">
-                                        <p class="text-slate-600 font-medium" style="font-family: 'Chivo', sans-serif;">${
-            edu.school || 'Institution'
-          }</p>
-                                        <span class="text-sm text-slate-500 bg-slate-100 px-3 py-1 rounded-full" style="font-family: 'Chivo', sans-serif; font-weight: 300;">${
-            edu.year || 'Year'
-          }</span>
-                                    </div>
-                                </div>
-                            `).join('')
-        }
-                        </div>
-                    </div>
-                    `
-        : ''
-    }
-
-                    <!-- Skills -->
-                    ${
-      cvData.skills.length > 0
-        ? `
-                    <div class="mb-10">
-                        <h2 class="text-2xl font-semibold text-slate-900 mb-6 pb-2 border-b-2 border-slate-200" style="font-family: 'Crimson Text', serif;">Skills</h2>
-                        <div class="flex flex-wrap gap-3">
-                            ${
-          cvData.skills.map(skill =>
-            `<span class="bg-slate-100 text-slate-800 font-thin px-4 py-0.5 rounded-xl border border-slate-200" style="font-family: 'Chivo', sans-serif;">${skill}</span>`
-          ).join('')
-        }
-                        </div>
-                    </div>
-                    `
-        : ''
-    }
-                </div>
-            </div>
-        </div>
-    `
   }
 
   async function exportToPDF() {
@@ -217,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
       'http://localhost:3000/fetch?url=https://cdn.tailwindcss.com',
     ).then(res => res.text())
     const fontCSS = await fetch(
-      'http://localhost:3000/fetch?url=https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap',
+      'http://localhost:3000/fetch?url=https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;700&family=Cormorant+Garamond:wght@700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Fira+Sans:wght@400&family=Inter:wght@400;500;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Noto+Serif:wght@400&family=Open+Sans:wght@400&family=Oxygen:wght@300&family=Playfair+Display:wght@400;700&family=Raleway:wght@300&family=Roboto:wght@700&family=Source+Sans+Pro:wght@400&display=swap',
     ).then(res => res.text())
 
     const html = `
@@ -299,38 +193,44 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const experienceItem = document.createElement('div')
     experienceItem.className =
-      'p-4 border border-gray-200 rounded-lg relative bg-white'
+      'p-4 border border-gray-200 rounded-lg bg-white grid grid-cols-[1fr_auto] items-start gap-4'
     experienceItem.setAttribute('data-id', id)
     experienceItem.innerHTML = `
-            <input type="text" placeholder="Job Title" class="p-2 border border-gray-300 rounded-md w-full mb-2 focus:ring-2 focus:ring-blue-500" data-field="title" value="${
+            <div>
+                <input type="text" placeholder="Job Title" class="p-2 border border-gray-300 rounded-md w-full mb-2 focus:ring-2 focus:ring-blue-500" data-field="title" value="${
       expData.title || ''
     }">
-            <input type="text" placeholder="Company" class="p-2 border border-gray-300 rounded-md w-full mb-2 focus:ring-2 focus:ring-blue-500" data-field="company" value="${
+                <input type="text" placeholder="Company" class="p-2 border border-gray-300 rounded-md w-full mb-2 focus:ring-2 focus:ring-blue-500" data-field="company" value="${
       expData.company || ''
     }">
-            <div class="grid grid-cols-2 gap-2 mb-2">
-                <input type="text" placeholder="Start Date" class="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" data-field="startDate" value="${
+                <div class="grid grid-cols-2 gap-2 mb-2">
+                    <input type="text" placeholder="Start Date" class="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" data-field="startDate" value="${
       expData.startDate || ''
     }">
-                <input type="text" placeholder="End Date" class="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" data-field="endDate" value="${
+                    <input type="text" placeholder="End Date" class="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" data-field="endDate" value="${
       expData.endDate || ''
     }">
-            </div>
-            <textarea placeholder="Description" class="p-2 border border-gray-300 rounded-md w-full h-20 focus:ring-2 focus:ring-blue-500" data-field="description">${
+                </div>
+                <textarea rows="4" placeholder="Description" class="p-2 border border-gray-300 rounded-md w-full focus:ring-2 focus:ring-blue-500" data-field="description">${
       expData.description || ''
     }</textarea>
-            <div class="absolute top-2 right-2 flex gap-1">
-                <button class="text-blue-500 hover:text-blue-700 p-1" data-action="move-experience-up" title="Move up">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M7 14l5-5 5 5z"/>
+            </div>
+            <div class="flex flex-col gap-1">
+                <button class="text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full p-1 transition-colors" data-action="move-experience-up" title="Move up">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"/>
                     </svg>
                 </button>
-                <button class="text-blue-500 hover:text-blue-700 p-1" data-action="move-experience-down" title="Move down">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M7 10l5 5 5-5z"/>
+                <button class="text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full p-1 transition-colors" data-action="move-experience-down" title="Move down">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
                     </svg>
                 </button>
-                <button class="text-red-500 hover:text-red-700 font-bold text-xl" data-action="remove-experience">&times;</button>
+                <button class="text-red-500 hover:text-red-700 hover:bg-red-100 rounded-full p-1 transition-colors" data-action="remove-experience" title="Remove experience">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                    </svg>
+                </button>
             </div>
         `
     document.getElementById('experience-list').appendChild(experienceItem)
@@ -353,33 +253,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const educationItem = document.createElement('div')
     educationItem.className =
-      'p-4 border border-gray-200 rounded-lg relative bg-white'
+      'p-4 border border-gray-200 rounded-lg bg-white grid grid-cols-[1fr_auto] items-start gap-4'
     educationItem.setAttribute('data-id', id)
     educationItem.innerHTML = `
-            <input type="text" placeholder="Degree" class="p-2 border border-gray-300 rounded-md w-full mb-2 focus:ring-2 focus:ring-blue-500" data-field="degree" value="${
+            <div>
+                <input type="text" placeholder="Degree" class="p-2 border border-gray-300 rounded-md w-full mb-2 focus:ring-2 focus:ring-blue-500" data-field="degree" value="${
       eduData.degree || ''
     }">
-            <input type="text" placeholder="Field of Study" class="p-2 border border-gray-300 rounded-md w-full mb-2 focus:ring-2 focus:ring-blue-500" data-field="field" value="${
+                <input type="text" placeholder="Field of Study" class="p-2 border border-gray-300 rounded-md w-full mb-2 focus:ring-2 focus:ring-blue-500" data-field="field" value="${
       eduData.field || ''
     }">
-            <input type="text" placeholder="School" class="p-2 border border-gray-300 rounded-md w-full mb-2 focus:ring-2 focus:ring-blue-500" data-field="school" value="${
+                <input type="text" placeholder="School" class="p-2 border border-gray-300 rounded-md w-full mb-2 focus:ring-2 focus:ring-blue-500" data-field="school" value="${
       eduData.school || ''
     }">
-            <input type="text" placeholder="Year" class="p-2 border border-gray-300 rounded-md w-full focus:ring-2 focus:ring-blue-500" data-field="year" value="${
+                <input type="text" placeholder="Year" class="p-2 border border-gray-300 rounded-md w-full focus:ring-2 focus:ring-blue-500" data-field="year" value="${
       eduData.year || ''
     }">
-            <div class="absolute top-2 right-2 flex gap-1">
-                <button class="text-blue-500 hover:text-blue-700 p-1" data-action="move-education-up" title="Move up">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M7 14l5-5 5 5z"/>
+            </div>
+            <div class="flex flex-col gap-1">
+                <button class="text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full p-1 transition-colors" data-action="move-education-up" title="Move up">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"/>
                     </svg>
                 </button>
-                <button class="text-blue-500 hover:text-blue-700 p-1" data-action="move-education-down" title="Move down">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M7 10l5 5 5-5z"/>
+                <button class="text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full p-1 transition-colors" data-action="move-education-down" title="Move down">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
                     </svg>
                 </button>
-                <button class="text-red-500 hover:text-red-700 font-bold text-xl" data-action="remove-education">&times;</button>
+                <button class="text-red-500 hover:text-red-700 hover:bg-red-100 rounded-full p-1 transition-colors" data-action="remove-education" title="Remove education">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                    </svg>
+                </button>
             </div>
         `
     document.getElementById('education-list').appendChild(educationItem)
@@ -532,6 +438,12 @@ document.addEventListener('DOMContentLoaded', function() {
       const item = e.target.closest('[data-id]')
       moveEducationDown(item.dataset.id)
     }
+  })
+
+  stylePicker.addEventListener('change', function(e) {
+    cvData.style = e.target.value
+    renderCV()
+    saveState()
   })
 
   exportPdfBtn.addEventListener('click', exportToPDF)
