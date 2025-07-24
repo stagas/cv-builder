@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV Builder</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+    body {
+      font-family: 'Chivo', sans-serif;
+    }
+
+    .serif-font {
+      font-family: 'Crimson Text', serif;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+  <div class="container mx-auto p-4 md:p-8">
+    <header class="text-center mb-10">
+      <h1 class="text-5xl font-extrabold text-gray-900">CV Builder</h1>
+      <p class="text-gray-500 mt-2">Create and export your professional CV with ease.</p>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div class="bg-white p-6 rounded-xl shadow-lg">
+        <h2 class="text-3xl font-bold mb-6 text-gray-900 border-b pb-4">Editor</h2>
+        <div id="editor" class="space-y-6">
+          <!-- Personal Details -->
+          <div class="p-4 bg-gray-50 rounded-lg shadow-inner">
+            <h3 class="text-xl font-semibold mb-3 text-gray-800">Personal Details</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <input type="text" id="name" placeholder="Full Name"
+                class="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+              <input type="email" id="email" placeholder="Email"
+                class="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+              <input type="tel" id="phone" placeholder="Phone"
+                class="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+              <input type="url" id="linkedin" placeholder="LinkedIn Profile URL"
+                class="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+              <input type="url" id="github" placeholder="GitHub Profile URL"
+                class="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+            </div>
+          </div>
+
+          <!-- Summary -->
+          <div class="p-4 bg-gray-50 rounded-lg shadow-inner">
+            <h3 class="text-xl font-semibold mb-3 text-gray-800">Summary</h3>
+            <textarea id="summary" placeholder="Professional Summary"
+              class="p-3 border border-gray-300 rounded-lg w-full h-28 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"></textarea>
+          </div>
+
+          <!-- Experience -->
+          <div class="p-4 bg-gray-50 rounded-lg shadow-inner">
+            <div class="flex justify-between items-center mb-3">
+              <h3 class="text-xl font-semibold text-gray-800">Work Experience</h3>
+              <button id="add-experience-btn"
+                class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition text-sm">Add</button>
+            </div>
+            <div id="experience-list" class="space-y-4">
+              <!-- Experience items will be added here -->
+            </div>
+          </div>
+
+          <!-- Education -->
+          <div class="p-4 bg-gray-50 rounded-lg shadow-inner">
+            <div class="flex justify-between items-center mb-3">
+              <h3 class="text-xl font-semibold text-gray-800">Education</h3>
+              <button id="add-education-btn"
+                class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition text-sm">Add</button>
+            </div>
+            <div id="education-list" class="space-y-4">
+              <!-- Education items will be added here -->
+            </div>
+          </div>
+
+          <!-- Skills -->
+          <div class="p-4 bg-gray-50 rounded-lg shadow-inner">
+            <h3 class="text-xl font-semibold mb-3 text-gray-800">Skills</h3>
+            <input type="text" id="skills" placeholder="Comma-separated skills (e.g., HTML, CSS, JavaScript)"
+              class="p-3 border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+          </div>
+        </div>
+      </div>
+      <div class="sticky top-8 self-start">
+        <h2 class="text-3xl font-bold mb-6 text-gray-900 border-b pb-4">Preview</h2>
+        <div id="preview-wrapper" class="bg-white rounded-xl shadow-2xl w-full aspect-[210/297] overflow-hidden">
+          <div id="cv-container" class="origin-top-left bg-white" style="width: 1050px; height: 1485px;">
+            <p class="text-center text-gray-500">Your CV preview will appear here.</p>
+          </div>
+        </div>
+        <div class="mt-6 text-center">
+          <button id="export-pdf-btn"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition shadow-md hover:shadow-lg">
+            Export as PDF
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+
+</html>
