@@ -47,8 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
       && cvData.summary === '' && cvData.experience.length === 0
       && cvData.education.length === 0 && cvData.skills.length === 0
     ) {
-      cvContainer.innerHTML =
-        `<p class="text-center text-gray-500">Your CV preview will appear here.</p>`
+      cvContainer.innerHTML = ''
       return
     }
 
