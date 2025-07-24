@@ -392,7 +392,10 @@ document.addEventListener('DOMContentLoaded', function() {
     else if (e.target.id === 'add-education-btn') {
       addEducation()
     }
-    else if (e.target.dataset.action === 'remove-experience') {
+    else if (
+      e.target.dataset.action === 'remove-experience'
+      || e.target.closest('[data-action="remove-experience"]')
+    ) {
       const item = e.target.closest('[data-id]')
       cvData.experience = cvData.experience.filter(entry =>
         entry.id != item.dataset.id
@@ -401,7 +404,10 @@ document.addEventListener('DOMContentLoaded', function() {
       renderCV()
       saveState()
     }
-    else if (e.target.dataset.action === 'remove-education') {
+    else if (
+      e.target.dataset.action === 'remove-education'
+      || e.target.closest('[data-action="remove-education"]')
+    ) {
       const item = e.target.closest('[data-id]')
       cvData.education = cvData.education.filter(entry =>
         entry.id != item.dataset.id
